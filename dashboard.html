@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECE 36200 - Project Management Dashboard</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .group-list {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #555;
+        }
+        .group-item:last-child {
+            border-bottom: none;
+        }
+        .group-name {
+            font-weight: bold;
+        }
+        .group-members {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+        .group-buttons {
+            display: flex;
+        }
+        .group-buttons button {
+            background-color: #5e5e5e;
+            border: none;
+            padding: 8px 16px;
+            margin-left: 10px;
+            color: white;
+            cursor: pointer;
+        }
+        .group-buttons .feedback-green {
+            background-color: green;
+        }
+        .group-buttons .feedback-red {
+            background-color: red;
+        }
+        .group-buttons .feedback-yellow {
+            background-color: #5e5e5e;
+        }
+        .group-buttons button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>Total Students: 360</div>
+        <div>Students not Submitted: 352</div>
+        <div>Projects Needing Review: 1</div>
+        <div>Cleared Projects: 1</div>
+        <div>Rejected Projects: 1</div>
+    </header>
+    <div class="group-list">
+        <div class="group-item">
+            <div class="group-name">Group Name</div>
+            <div class="group-members">Name 1, Name 2, Name 3, Name 4</div>
+            <div class="group-buttons">
+                <button>Proposal</button>
+                <button class="feedback-green">Feedback</button>
+            </div>
+        </div>
+        <div class="group-item">
+            <div class="group-name">Group Name</div>
+            <div class="group-members">Name 1, Name 2, Name 3, Name 4</div>
+            <div class="group-buttons">
+                <button>Proposal</button>
+                <button class="feedback-red">Feedback</button>
+            </div>
+        </div>
+        <div class="group-item">
+            <div class="group-name">Group Name</div>
+            <div class="group-members">Name 1, Name 2, Name 3, Name 4</div>
+            <div class="group-buttons">
+                <button>Proposal</button>
+                <button class="feedback-yellow">Feedback</button>
+            </div>
+        </div>
+        <!-- Repeat for more groups -->
+    </div>
+</body>
+</html>
