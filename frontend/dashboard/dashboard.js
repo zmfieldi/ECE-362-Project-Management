@@ -36,25 +36,25 @@ function handleFeedback(button) {
     if (isAcceptable) {
         button.classList.add("feedback-green");
         button.textContent = "Acceptable";
-        if (currentStatus !== 'acceptable') {
-            if (currentStatus === 'needs-work') {
-                rejectedCount--; // Decrement rejected count
-            }
+        if (currentStatus === 'pending') {
             acceptableCount++; // Increment acceptable count
-            button.setAttribute('data-status', 'acceptable');
             projectsNeedingReview--; // Decrement projects needing review
+        } else if (currentStatus === 'needs-work') {
+            rejectedCount--; // Decrement rejected count
+            acceptableCount++; // Increment acceptable count
         }
+        button.setAttribute('data-status', 'acceptable');
     } else {
         button.classList.add("feedback-red");
         button.textContent = "Needs Work";
-        if (currentStatus !== 'needs-work') {
-            if (currentStatus === 'acceptable') {
-                acceptableCount--; // Decrement acceptable count
-            }
+        if (currentStatus === 'pending') {
             rejectedCount++; // Increment rejected count
-            button.setAttribute('data-status', 'needs-work');
             projectsNeedingReview--; // Decrement projects needing review
+        } else if (currentStatus === 'acceptable') {
+            acceptableCount--; // Decrement acceptable count
+            rejectedCount++; // Increment rejected count
         }
+        button.setAttribute('data-status', 'needs-work');
     }
 
     // Update the counts in the DOM
