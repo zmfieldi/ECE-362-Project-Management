@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECE 36200 - Project Management Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <header>
+        <div>Total Students: 360</div>
+        <div>Students not Submitted: 352</div>
+        <div>Projects Needing Review: 1</div>
+        <div>Cleared Projects: 1</div>
+        <div>Rejected Projects: 1</div>
+    </header>
+    <div class="group-list">
+        <div class="group-item">
+            <div class="group-name">Group Name</div>
+            <div class="group-members">
+                Name 1, Name 2, Name 3, Name 4
+                <a href="path/to/proposal1.pdf" class="proposal-link" target="_blank">Proposal</a>
+            </div>
+            <div class="group-buttons">
+                <button class="feedback-button" onclick="handleFeedback(this)">Feedback</button>
+            </div>
+        </div>
+        <div class="group-item">
+            <div class="group-name">Group Name</div>
+            <div class="group-members">
+                Name 1, Name 2, Name 3, Name 4
+                <a href="path/to/proposal2.pdf" class="proposal-link" target="_blank">Proposal</a>
+            </div>
+            <div class="group-buttons">
+                <button class="feedback-button" onclick="handleFeedback(this)">Feedback</button>
+            </div>
+        </div>
+        <div class="group-item">
+            <div class="group-name">Group Name</div>
+            <div class="group-members">
+                Name 1, Name 2, Name 3, Name 4
+                <a href="path/to/proposal3.pdf" class="proposal-link" target="_blank">Proposal</a>
+            </div>
+            <div class="group-buttons">
+                <button class="feedback-button" onclick="handleFeedback(this)">Feedback</button>
+            </div>
+        </div>
+        <!-- Repeat for more groups -->
+    </div>
+
+    <!-- External JavaScript file -->
+    <script src="dashboard.js"></script>
+</body>
+</html>
