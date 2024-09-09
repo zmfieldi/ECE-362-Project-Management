@@ -9,18 +9,71 @@
 <body>
     <h1>ECE 362 Project Proposal</h1>
     <form action="/backend/submit_proposal.php" method="POST" enctype="multipart/form-data">
-        <input type="text" name="group_name" placeholder="Group Name" required
-               pattern="[a-z0-9]{2,8}" title="Group name must be 2-8 characters long and contain only lowercase letters and digits.">
-        <input type="text" name="user1" placeholder="Group member 1 Purdue Username" required
-               pattern="[a-z0-9]{2,8}" title="PUID must be 2-8 characters long and contain only lowercase letters and digits.">
-        <input type="text" name="user2" placeholder="Group member 2 Purdue Username" required
-               pattern="[a-z0-9]{2,8}" title="PUID must be 2-8 characters long and contain only lowercase letters and digits.">
-        <input type="text" name="user3" placeholder="Group member 3 Purdue Username" required
-               pattern="[a-z0-9]{2,8}" title="PUID must be 2-8 characters long and contain only lowercase letters and digits.">
-        <input type="text" name="user4" placeholder="Group member 4 Purdue Username" required
-               pattern="[a-z0-9]{2,8}" title="PUID must be 2-8 characters long and contain only lowercase letters and digits.">
-        <input type="file" name="proposal" required>
+        <div class="form-row">
+              <div class="form-group">
+                  <label for="group_name">Group Name:</label>
+                  <input type="text" name="group_name" id="group_name" required
+                         pattern="[a-z0-9]{2,8}" title="Group name must be 2-8 characters long and contain only lowercase letters and digits.">
+              </div>
+  
+              <div class="form-group">
+                  <label for="user1">Purdue Username 1:</label>
+                  <input type="text" name="user1" id="user1" required
+                         pattern="[a-z0-9]{2,8}" title="PUID must be 2-8 characters long and contain only lowercase letters and digits.">
+              </div>
+  
+              <div class="form-group">
+                  <label for="user2">Purdue Username 2:</label>
+                  <input type="text" name="user2" id="user2" required
+                         pattern="[a-z0-9]{2,8}" title="PUID must be 2-8 characters long and contain only lowercase letters and digits.">
+              </div>
+  
+              <div class="form-group">
+                  <label for="user3">Purdue Username 3:</label>
+                  <input type="text" name="user3" id="user3" required
+                         pattern="[a-z0-9]{2,8}" title="PUID must be 2-8 characters long and contain only lowercase letters and digits.">
+              </div>
+  
+              <div class="form-group">
+                  <label for="user4">Purdue Username 4:</label>
+                  <input type="text" name="user4" id="user4" required
+                         pattern="[a-z0-9]{2,8}" title="PUID must be 2-8 characters long and contain only lowercase letters and digits.">
+              </div>
+       </div>
+
+        <div class="form-question">
+            <label for="project_description">Please provide a brief description of your project and what it will be able to do.  Specify four specific but concise objectives for your project:</label>
+            <textarea name="project_description" id="project_description" required></textarea>
+        </div>
+        
+        <div class="form-question">
+            <label for="main_features">3.	What are the main features of your project? Describe the hardware you plan to use, what parts you wish to acquire (include purchase links for non-kit-based parts), and what your code will do to make the project work:</label>
+            <textarea name="main_features" id="main_features" required></textarea>
+        </div>
+
+        <div class="form-question">
+            <label for="external_interfaces">Provide at least two of the external interface formats your project will use:</label>
+            <textarea name="external_interfaces" id="external_interfaces" required></textarea>
+        </div>
+
+        <div class="form-question">
+            <label for="internal_peripherals">Provide at least four of the internal peripheral subsystems your project will use:</label>
+            <textarea name="internal_peripherals" id="internal_peripherals" required></textarea>
+        </div>
+
+        <div class="form-question">
+            <label for="timeline">Provide an outline of your planned timeline for completing the various steps of your project. Please give specific deliverables (e.g. complete UART initialization code by 10/18/2024) and not vague ones (e.g. complete integration of UART by October):</label>
+            <textarea name="timeline" id="timeline" required></textarea>
+        </div>
+
+        <div class="form-question">
+            <label for="related_projects">List some related published projects, products, or articles that you found that are similar to your project. Provide links to them if possible. Does your project do anything better or different? If so, what?</label>
+            <textarea name="related_projects" id="related_projects" required></textarea>
+        </div>
+
+      
         <input type="submit" value="Submit">
     </form>
 </body>
-</html>
+
+
