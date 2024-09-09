@@ -1,8 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    updateDashboard();
+    fetchGroupData();
 });
 
-function updateDashboard() {
+function fetchGroupData() {
+    fetch('path/to/group_data.json')
+        .then(response => response.json())
+        .then(groupsData => {
+            updateDashboard(groupsData);
+            renderGroupList(groupsData);
+        })
+        .catch(error => console.error('Error fetching group data:', error));
+}
+
+function updateDashboard(groupsData) {
     const feedbackButtons = document.querySelectorAll('.feedback-button');
     const projectsNeedingReviewElement = document.getElementById('projects-needing-review');
     const studentsNotSubmittedElement = document.getElementById('students-not-submitted');
@@ -13,6 +23,48 @@ function updateDashboard() {
     // Initialize counts
     projectsNeedingReviewElement.textContent = numberOfGroups;
     studentsNotSubmittedElement.textContent = totalStudents - (numberOfGroups * studentsPerGroup);
+}
+
+function renderGroupList(groupsData) {
+    const groupListElement = document.querySelector('.group-list');
+    groupListElement.innerHTML = ''; // Clear existing content
+
+    groupsData.forEach(group => {
+        const groupItem = document.createElement('div');
+        groupItem.className = 'group-item';
+
+        const groupName = document.createElement('div');
+        groupName.className = 'group-name';
+        groupName.textContent = group.name;
+
+        const groupMembers = document.createElement('div');
+        groupMembers.className = 'group-members';
+        groupMembers.textContent = group.members.join(', ');
+
+        const groupButtons = document.createElement('div');
+        groupButtons.className = 'group-buttons';
+
+        const proposalLink = document.createElement('a');
+        proposalLink.href = `path/to/proposals/${group.name.replace(/\s+/g, '-')}.pdf`; // Adjust as needed
+        proposalLink.textContent = 'Proposal';
+        proposalLink.target = '_blank';
+        proposalLink.className = 'proposal-link';
+
+        const feedbackButton = document.createElement('button');
+        feedbackButton.textContent = 'Feedback';
+        feedbackButton.className = `feedback-button feedback-${group.status}`;
+        feedbackButton.setAttribute('data-status', group.status);
+        feedbackButton.onclick = () => handleFeedback(feedbackButton);
+
+        groupButtons.appendChild(proposalLink);
+        groupButtons.appendChild(feedbackButton);
+
+        groupItem.appendChild(groupName);
+        groupItem.appendChild(groupMembers);
+        groupItem.appendChild(groupButtons);
+
+        groupListElement.appendChild(groupItem);
+    });
 }
 
 function handleFeedback(button) {
