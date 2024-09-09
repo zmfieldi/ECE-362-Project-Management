@@ -11,8 +11,8 @@
         <div>Total Students: 360</div>
         <div>Students not Submitted: 352</div>
         <div>Projects Needing Review: 1</div>
-        <div>Cleared Projects: 1</div>
-        <div>Rejected Projects: 1</div>
+        <div>Cleared Projects: <span id="acceptable-count">1</span></div>
+        <div>Rejected Projects: <span id="rejected-count">1</span></div>
     </header>
     <div class="group-list">
         <div class="group-item">
@@ -22,7 +22,7 @@
                 <a href="path/to/proposal1.pdf" class="proposal-link" target="_blank">Proposal</a>
             </div>
             <div class="group-buttons">
-                <button class="feedback-button" onclick="handleFeedback(this)">Feedback</button>
+                <button class="feedback-button" data-status="pending" onclick="handleFeedback(this)">Feedback</button>
             </div>
         </div>
         <div class="group-item">
@@ -32,7 +32,7 @@
                 <a href="path/to/proposal2.pdf" class="proposal-link" target="_blank">Proposal</a>
             </div>
             <div class="group-buttons">
-                <button class="feedback-button" onclick="handleFeedback(this)">Feedback</button>
+                <button class="feedback-button" data-status="pending" onclick="handleFeedback(this)">Feedback</button>
             </div>
         </div>
         <div class="group-item">
@@ -42,7 +42,7 @@
                 <a href="path/to/proposal3.pdf" class="proposal-link" target="_blank">Proposal</a>
             </div>
             <div class="group-buttons">
-                <button class="feedback-button" onclick="handleFeedback(this)">Feedback</button>
+                <button class="feedback-button" data-status="pending" onclick="handleFeedback(this)">Feedback</button>
             </div>
         </div>
         <!-- Repeat for more groups -->
