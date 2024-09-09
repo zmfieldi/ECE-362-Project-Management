@@ -20,8 +20,9 @@ header {
 
 .group-item {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 10px;
     border-bottom: 1px solid #555;
 }
@@ -40,6 +41,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
 .group-buttons {
@@ -92,4 +94,40 @@ header {
 
 .feedback-button:hover {
     opacity: 0.8;
+}
+
+.additional-info {
+    display: none; /* Hidden initially */
+    margin-top: 10px;
+    background-color: #333;
+    padding: 10px;
+    width: 100%;
+}
+
+.additional-info div {
+    margin-bottom: 10px;
+}
+
+.feedback-gray {
+    background-color: #ccc;
+    color: #666;
+}
+
+.feedback-gray:hover {
+    opacity: 0.8;
+}
+
+.accepted {
+    background-color: #4CAF50 !important; /* Green */
+    color: white;
+}
+
+.rejected {
+    background-color: #F44336 !important; /* Red */
+    color: white;
+}
+
+.feedback-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
