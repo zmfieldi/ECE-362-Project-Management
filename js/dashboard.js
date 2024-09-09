@@ -12,6 +12,7 @@ function fetchGroupData() {
         .catch(error => console.error('Error fetching group data:', error));
 }
 
+
 function updateDashboard(groupsData) {
     const feedbackButtons = document.querySelectorAll('.feedback-button');
     const projectsNeedingReviewElement = document.getElementById('projects-needing-review');
@@ -115,3 +116,32 @@ function handleFeedback(button) {
     projectsNeedingReviewElement.textContent = projectsNeedingReview;
     studentsNotSubmittedElement.textContent = totalStudents - (numberOfGroups * studentsPerGroup);
 }
+
+// function fetchGroups() {
+//     fetch('fetch_groups.php')
+//         .then(response => response.json())
+//         .then(data => {
+//             const groupList = document.querySelector('.group-list');
+//             groupList.innerHTML = ''; // Clear existing content
+            
+//             data.forEach(group => {
+//                 const groupItem = document.createElement('div');
+//                 groupItem.className = 'group-item';
+                
+//                 groupItem.innerHTML = `
+//                     <div class="group-name">${group.name}</div>
+//                     <div class="group-members">${group.members.join(', ')}</div>
+//                     <div class="group-buttons">
+//                         <a href="proposals/${group.proposal_file}" class="proposal-link">Proposal</a>
+//                         <button class="feedback-button" data-group="${group.name}" data-status="${group.status}">Feedback</button>
+//                     </div>
+//                 `;
+                
+//                 groupList.appendChild(groupItem);
+//             });
+//         })
+//         .catch(error => console.error('Error fetching group data:', error));
+// }
+
+// // Fetch and display groups when the page loads
+// document.addEventListener('DOMContentLoaded', fetchGroups);
