@@ -2,6 +2,3 @@
 <Files *>
     Require all granted
 </Files>
-
-# Enable directory browsing (optional)
-Options +Indexes
