@@ -64,9 +64,15 @@ proposals.forEach((proposal, index) => {
             // Update counts
             reviewCount--;
             clearedProjects++;
-            acceptButton.classList.add('accepted');
-            acceptButton.style.backgroundColor = '#4CAF50'; // Green
-            acceptButton.style.color = 'white';
+            const confirmAccept = confirm("Are you sure you want to accept the proposal?");
+            if (confirmAccept) {
+                // If confirmed, proceed with accept logic
+                // You can add your logic to update the status of the project to "accepted" here
+                alert('Proposal accepted!');
+                acceptButton.classList.add('accepted');
+                acceptButton.style.backgroundColor = '#4CAF50'; // Green
+                acceptButton.style.color = 'white';
+            }
             rejectButton.disabled = true;
             rejectButton.style.backgroundColor = '#ccc'; // Grey
             rejectButton.style.color = '#666';
@@ -79,16 +85,71 @@ proposals.forEach((proposal, index) => {
             // Update counts
             reviewCount--;
             rejectedProjects++;
-            rejectButton.classList.add('rejected');
-            rejectButton.style.backgroundColor = '#F44336'; // Red
-            rejectButton.style.color = 'white';
-            acceptButton.disabled = true;
-            acceptButton.style.backgroundColor = '#ccc'; // Grey
-            acceptButton.style.color = '#666';
+            const rejectionPopup = document.createElement('div');
+            rejectionPopup.setAttribute('id', 'rejection-popup');
+            rejectionPopup.innerHTML = `
+                <h3>Please provide revisions for the proposal:</h3>
+                <textarea id="rejection-feedback" placeholder="Enter your revisions here..." rows="10" cols="100"></textarea>
+                <br>
+                <button id="finish-rejection-btn">Finish</button>
+            `;
+            rejectionPopup.style.position = 'fixed';
+            rejectionPopup.style.top = '20%';
+            rejectionPopup.style.left = '50%';
+            rejectionPopup.style.transform = 'translate(-50%, -50%)';
+            rejectionPopup.style.padding = '20px';
+            rejectionPopup.style.backgroundColor = '#1e1e1e';
+            rejectionPopup.style.border = '1px solid #ccc';
+            rejectionPopup.style.zIndex = '1000';
+
+            // Append the popup to the body
+            document.body.appendChild(rejectionPopup);
+            document.getElementById('finish-rejection-btn').addEventListener('click', function() {
+                const feedback = document.getElementById('rejection-feedback').value;
+
+                if (feedback.trim() === "") {
+                    alert("Please provide revision feedback before submitting.");
+                } else {
+                    // Handle rejection submission and feedback storage
+                    alert('Proposal rejected with revisions provided!');
+                    
+                    rejectButton.classList.add('rejected');
+                    rejectButton.style.backgroundColor = '#F44336'; // Red
+                    rejectButton.style.color = 'white';
+                    acceptButton.disabled = true;
+                    acceptButton.style.backgroundColor = '#ccc'; // Grey
+                    acceptButton.style.color = '#666'; // Change button color to red
+
+                    // Remove the popup after submission
+                    document.body.removeChild(rejectionPopup);
+
+                    //Include the Revisions
+                    addRevisionsSection(additionalInfo, feedback);
+                }
+            });
             updateCounts();
         }
     });
 });
+
+function addRevisionsSection(additionalInfo, feedback) {
+    // Check if a Revisions section already exists
+    let revisionsSection = additionalInfo.querySelector('.revisions-section');
+    if (!revisionsSection) {
+        // Create a new Revisions section with similar formatting to the additional info
+        revisionsSection = document.createElement('div');
+        revisionsSection.classList.add('revisions-section');
+        revisionsSection.innerHTML = `
+            <div><strong>Revisions:</strong> <br>${feedback}</div>
+        `;
+
+        // Append the revisions section to the end of the additional info
+        additionalInfo.appendChild(revisionsSection);
+    } else {
+        // If it exists, update the content
+        revisionsSection.querySelector('div').innerHTML = `<strong>Revisions:</strong> <br>${feedback}`;
+    }
+}
 
 function updateCounts() {
     studentsNotSubmitted.textContent = 360 - (proposals.length * 4); // Assuming 4 members per group
@@ -99,3 +160,5 @@ function updateCounts() {
 
 // Initialize counts
 updateCounts();
+
+

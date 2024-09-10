@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-question">
-            <label for="project_description">Please provide a brief description of your project and what it will be able to do.  Specify four specific but concise objectives for your project:</label>
+            <label for="project_description">Please provide a brief description of your project and what it will be able to do. Specify four specific but concise objectives for your project:</label>
             <textarea name="project_description" id="project_description" required></textarea>
         </div>
         
@@ -71,26 +71,10 @@
             <textarea name="related_projects" id="related_projects" required></textarea>
         </div>
 
-      
         <input type="submit" value="Submit">
     </form>
-    <script>
-       document.getElementById('project-proposal-form').addEventListener('submit', function(event) {
-           event.preventDefault(); // Prevent actual form submission
-
-           // Capture form data
-           const formData = new FormData(event.target);
-           const formObject = Object.fromEntries(formData.entries());
-
-           // Convert form data to JSON and store in localStorage
-           const storedData = JSON.parse(localStorage.getItem('projectProposals') || '[]');
-           storedData.push(formObject);
-           localStorage.setItem('projectProposals', JSON.stringify(storedData));
-
-           alert('Form data submitted as JSON!');
-       });
+    <script src="/js/student.js"></script>
    </script>
    
 </body>
-
-
+</html>

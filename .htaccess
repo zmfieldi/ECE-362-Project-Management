@@ -1,4 +1,27 @@
-# Allow access to all files
-<Files *>
-    Require all granted
-</Files>
+# Enable URL rewriting
+RewriteEngine On
+
+# Redirect http://example.com to https://example.com (HTTPS redirect)
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect old page to new page
+Redirect 301 /old-page.html /new-page.html
+
+# Block a specific IP
+Order Deny,Allow
+Deny from 192.168.1.1
+
+# Custom 404 page
+ErrorDocument 404 /custom404.html
+
+# Enable browser caching
+
+# Prevent directory listing
+Options -Indexes
+
+# Set up basic authentication (protect a directory with a password)
+AuthType Basic
+AuthName "Restricted Area"
+AuthUserFile /path/to/.htpasswd
+Require valid-user
