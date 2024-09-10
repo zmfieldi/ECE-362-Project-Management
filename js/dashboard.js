@@ -64,18 +64,47 @@ proposals.forEach((proposal, index) => {
             // Update counts
             reviewCount--;
             clearedProjects++;
-            const confirmAccept = confirm("Are you sure you want to accept the proposal?");
-            if (confirmAccept) {
-                // If confirmed, proceed with accept logic
-                // You can add your logic to update the status of the project to "accepted" here
-                alert('Proposal accepted!');
-                acceptButton.classList.add('accepted');
-                acceptButton.style.backgroundColor = '#4CAF50'; // Green
-                acceptButton.style.color = 'white';
-            }
-            rejectButton.disabled = true;
-            rejectButton.style.backgroundColor = '#ccc'; // Grey
-            rejectButton.style.color = '#666';
+            const acceptedPopup = document.createElement('div');
+            acceptedPopup.setAttribute('id', 'accepted-popup');
+            acceptedPopup.innerHTML = `
+                <h3>Please provide revisions for the proposal:</h3>
+                <textarea id="accepted-feedback" placeholder="Enter your revisions here..." rows="10" cols="100"></textarea>
+                <br>
+                <button id="finish-accepted-btn">Finish</button>
+            `;
+            acceptedPopup.style.position = 'fixed';
+            acceptedPopup.style.top = '20%';
+            acceptedPopup.style.left = '50%';
+            acceptedPopup.style.transform = 'translate(-50%, -50%)';
+            acceptedPopup.style.padding = '20px';
+            acceptedPopup.style.backgroundColor = '#1e1e1e';
+            acceptedPopup.style.border = '1px solid #ccc';
+            acceptedPopup.style.zIndex = '1000';
+            
+
+            document.body.appendChild(acceptedPopup);
+            document.getElementById('finish-accepted-btn').addEventListener('click', function() {
+                const feedback = document.getElementById('accepted-feedback').value;
+
+                if (feedback.trim() === "") {
+                    alert("Please provide feedback before submitting.");
+                } else {
+                    // Handle rejection submission and feedback storage
+                    alert('Proposal accepted with comments provided!');
+                    
+                    acceptButton.classList.add('accepted');
+                    acceptButton.style.backgroundColor = '#4CAF50'; // Green
+                    acceptButton.style.color = 'white';
+                    rejectButton.disabled = true;
+                    rejectButton.style.backgroundColor = '#ccc'; // Grey
+                    rejectButton.style.color = '#666';
+                    // Remove the popup after submission
+                    document.body.removeChild(acceptedPopup);
+
+                    //Include the Revisions
+                    addCommentSection(additionalInfo, feedback);
+                }
+            });
             updateCounts();
         }
     });
@@ -148,6 +177,25 @@ function addRevisionsSection(additionalInfo, feedback) {
     } else {
         // If it exists, update the content
         revisionsSection.querySelector('div').innerHTML = `<strong>Revisions:</strong> <br>${feedback}`;
+    }
+}
+
+function addCommentSection(additionalInfo, feedback) {
+    // Check if a Revisions section already exists
+    let revisionsSection = additionalInfo.querySelector('.revisions-section');
+    if (!revisionsSection) {
+        // Create a new Revisions section with similar formatting to the additional info
+        revisionsSection = document.createElement('div');
+        revisionsSection.classList.add('revisions-section');
+        revisionsSection.innerHTML = `
+            <div><strong>Comments:</strong> <br>${feedback}</div>
+        `;
+
+        // Append the revisions section to the end of the additional info
+        additionalInfo.appendChild(revisionsSection);
+    } else {
+        // If it exists, update the content
+        revisionsSection.querySelector('div').innerHTML = `<strong>Comments:</strong> <br>${feedback}`;
     }
 }
 
