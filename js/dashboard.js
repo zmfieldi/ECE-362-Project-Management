@@ -1,9 +1,9 @@
-// Configuration variables
-const emailSender = 'ece362@purdue.edu'; // Email address from which the email will be sent
-//const additionalRecipient = 'zmfiledi@purdue.edu'; // Additional recipient
+// Email address from which the email will be sent
+const emailSender = 'ece362@purdue.edu'; 
+
 
 // Fetch proposals from proposals.json
-fetch('dashboard.php')
+fetch('../backend/dashboard.php')
     .then(response => response.json())
     .then(proposals => {
         const groupList = document.getElementById('group-list');
@@ -50,7 +50,7 @@ fetch('dashboard.php')
 
             groupList.appendChild(groupDiv);
 
-            // Update button colors and disable the opposite button based on status
+            // Update button colors and disable based on status
             const acceptButton = groupDiv.querySelector('.accept-button');
             const rejectButton = groupDiv.querySelector('.reject-button');
 
@@ -59,7 +59,7 @@ fetch('dashboard.php')
                 acceptButton.style.color = 'white';
                 acceptButton.disabled = true;
                 rejectButton.disabled = true;
-                rejectButton.style.backgroundColor = '#ccc'; // Grey
+                rejectButton.style.backgroundColor = '#ccc';  // Gray
                 rejectButton.style.color = '#666';
                 clearedProjects++; 
                 reviewCount--;
@@ -69,19 +69,19 @@ fetch('dashboard.php')
                 rejectButton.style.color = 'white';
                 rejectButton.disabled = true;
                 acceptButton.disabled = true;
-                acceptButton.style.backgroundColor = '#ccc'; // Grey
+                acceptButton.style.backgroundColor = '#ccc'; // Gray
                 acceptButton.style.color = '#666';
                 rejectedProjects++;
                 reviewCount--
             }
 
-            // Add event listener for toggling proposal details
+            // Add event listener for viewing proposal details
             const proposalLink = groupDiv.querySelector('.proposal-link');
             const additionalInfo = groupDiv.querySelector('.additional-info');
 
             proposalLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior
-                // Toggle visibility
+                event.preventDefault(); 
+
                 if (additionalInfo.style.display === 'none' || additionalInfo.style.display === '') {
                     additionalInfo.style.display = 'block';
                     proposalLink.textContent = 'Hide Proposal';
@@ -91,7 +91,7 @@ fetch('dashboard.php')
                 }
             });
 
-            // Add event listeners for Accept and Reject buttons
+            // Add event listener for accept and reject
             acceptButton.addEventListener('click', function() {
                 if (!acceptButton.classList.contains('accepted') && !rejectButton.classList.contains('rejected')) {
                     reviewCount--;
@@ -119,7 +119,7 @@ fetch('dashboard.php')
                         if (comments.trim() === "") {
                             alert("Please provide comments before submitting.");
                         } else {
-                            fetch('update_proposal.php', {
+                            fetch('../backend/update_proposal.php', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -137,8 +137,9 @@ fetch('dashboard.php')
                                     acceptButton.classList.add('accepted');
                                     acceptButton.style.backgroundColor = '#4CAF50'; // Green
                                     acceptButton.style.color = 'white';
+                                    acceptButton.disabled = true;
                                     rejectButton.disabled = true;
-                                    rejectButton.style.backgroundColor = '#ccc'; // Grey
+                                    rejectButton.style.backgroundColor = '#ccc'; // Gray
                                     rejectButton.style.color = '#666';
                                     document.body.removeChild(acceptPopup);
                                     updateCounts();
@@ -182,7 +183,7 @@ fetch('dashboard.php')
                         if (feedback.trim() === "") {
                             alert("Please provide revision feedback before submitting.");
                         } else {
-                            fetch('update_proposal.php', {
+                            fetch('../backend/update_proposal.php', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -200,6 +201,7 @@ fetch('dashboard.php')
                                     rejectButton.classList.add('rejected');
                                     rejectButton.style.backgroundColor = '#F44336'; // Red
                                     rejectButton.style.color = 'white';
+                                    rejectButton.disabled = true;
                                     acceptButton.disabled = true;
                                     acceptButton.style.backgroundColor = '#ccc'; // Grey
                                     acceptButton.style.color = '#666';
@@ -235,34 +237,34 @@ fetch('dashboard.php')
             }
         }
 
+        // Update submission counts
         function updateCounts() {
-            studentsNotSubmitted.textContent = 360 - (proposals.length * 4); // Example calculation
+            studentsNotSubmitted.textContent = 360 - (proposals.length * 4); 
             projectsNeedingReview.textContent = reviewCount;
             clearedCount.textContent = clearedProjects;
             rejectedCount.textContent = rejectedProjects;
         }
 
         function sendEmail(groupName, status, feedback, usernames, additionalInfo) {
-            // Prepare the email details
             const subject = `Proposal ${status}: ${groupName}`;
             const body = `
-                Group Name: ${groupName}\n\n
-                ${status === 'Accepted' ? 'Comments:' : 'Reasons For Rejection:'}\n\n
-                ${feedback}\n\n
-                Additional Information:\n
-                Project Description: ${additionalInfo.projectDescription}\n
-                Main Features: ${additionalInfo.mainFeatures}\n
-                External Interfaces: ${additionalInfo.externalInterfaces}\n
-                Internal Peripherals: ${additionalInfo.internalPeripherals}\n
-                Timeline: ${additionalInfo.timeline}\n
-                Related Projects: ${additionalInfo.relatedProjects}
+                \rGroup Name: ${groupName}\n
+                \r${status === 'Accepted' ? 'Comments:' : 'Reasons For Rejection:'}\n
+                \r${feedback}\n
+                \rProject Proposal:\n
+                \rProject Description: ${additionalInfo.projectDescription}\n
+                \rMain Features: ${additionalInfo.mainFeatures}\n
+                \rExternal Interfaces: ${additionalInfo.externalInterfaces}\n
+                \rInternal Peripherals: ${additionalInfo.internalPeripherals}\n
+                \rTimeline: ${additionalInfo.timeline}\n
+                \rRelated Projects: ${additionalInfo.relatedProjects}
             `;
         
             // Collect recipient email addresses
             const recipients = usernames.map(username => `${username}@purdue.edu`);
         
-            // Send the email via server-side script
-            fetch('send_email.php', {
+            // Send a post request to send email
+            fetch('../backend/send_email.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -292,3 +294,7 @@ fetch('dashboard.php')
     .catch(error => {
         console.error('Error fetching proposals:', error);
     });
+
+
+
+    

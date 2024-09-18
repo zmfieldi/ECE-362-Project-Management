@@ -2,20 +2,20 @@
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // Handle form data
-    $groupName = htmlspecialchars($_POST['group_name']);
+    // Handle form data without htmlspecialchars
+    $groupName = $_POST['group_name'];
     $usernames = [
-        htmlspecialchars($_POST['user1']),
-        htmlspecialchars($_POST['user2']),
-        htmlspecialchars($_POST['user3']),
-        htmlspecialchars($_POST['user4'])
+        $_POST['user1'],
+        $_POST['user2'],
+        $_POST['user3'],
+        $_POST['user4']
     ];
-    $projectDescription = htmlspecialchars($_POST['project_description']);
-    $mainFeatures = htmlspecialchars($_POST['main_features']);
-    $externalInterfaces = htmlspecialchars($_POST['external_interfaces']);
-    $internalPeripherals = htmlspecialchars($_POST['internal_peripherals']);
-    $timeline = htmlspecialchars($_POST['timeline']);
-    $relatedProjects = htmlspecialchars($_POST['related_projects']);
+    $projectDescription = $_POST['project_description'];
+    $mainFeatures = $_POST['main_features'];
+    $externalInterfaces = $_POST['external_interfaces'];
+    $internalPeripherals = $_POST['internal_peripherals'];
+    $timeline = $_POST['timeline'];
+    $relatedProjects = $_POST['related_projects'];
 
     // Prepare data to be stored
     $data = [
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 
     // Load existing data
-    $existingDataPath = '/web/users/zmfieldi/dashboard/proposals.json';
+    $existingDataPath = '../dashboard/proposals.json';
     $existingData = json_decode(file_get_contents($existingDataPath), true);
     if (!$existingData) {
         $existingData = [];

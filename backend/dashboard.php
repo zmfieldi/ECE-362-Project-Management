@@ -1,6 +1,6 @@
 <?php
 // Path to your JSON file
-$jsonFilePath = '/web/users/zmfieldi/dashboard/proposals.json';
+$jsonFilePath = '../dashboard/proposals.json';
 
 // Check if the file exists
 if (file_exists($jsonFilePath)) {

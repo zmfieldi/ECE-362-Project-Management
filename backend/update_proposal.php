@@ -1,6 +1,6 @@
 <?php
     // Get the contents of the JSON file
-    $file = 'proposals.json';
+    $file = '../dashboard/proposals.json';
     $proposals = json_decode(file_get_contents($file), true);
 
     // Get the POST data
